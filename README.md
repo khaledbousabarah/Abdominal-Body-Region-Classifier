@@ -5,5 +5,5 @@ A Pytorch Model which classifies CT image slices to extract the abdominal region
 # Usage
 
 ```
-python main.py directory_of_ct_image_series/ outpur_directory/abdomen.nii.gz
+python main.py directory_of_ct_image_series/ output_directory/abdomen.nii.gz
 ```
