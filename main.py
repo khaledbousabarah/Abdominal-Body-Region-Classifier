@@ -10,7 +10,7 @@ from scipy.misc.pilutil import toimage
 import argparse
 
 
-def get_study(path):
+def get_study(path: str):
     def load_dcm(x):
         try:
             return pydicom.read_file(x)
@@ -45,21 +45,13 @@ class FakeMultiChannel(object):
     def __init__(self):
         pass
 
-    def __call__(self, x):
+    def __call__(self, x: np.array):
         x = x.astype(np.float32) / 255
         x = np.stack([x] * 3, axis=2)
         return toimage(x, channel_axis=2)
 
 
-class toTensor(object):
-    def __init__(self):
-        pass
-
-    def __call__(self, x):
-        return torch.tensor(x)
-
-
-def get_abdomen(preds):
+def get_abdomen(preds: list):
     abdomen = max((list(y) for (x, y) in itertools.groupby((enumerate(preds)), operator.itemgetter(1)) if x == 0),
                 key=len)
     bottom = min(abdomen)[0]
@@ -67,7 +59,7 @@ def get_abdomen(preds):
     return slice(bottom, top +1)
 
 
-def run(in_dir, out_file):
+def run(in_dir: str, out_file: str):
     ct_array, spacing = get_study(in_dir)
 
     m = torch.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'torch.pth'))
