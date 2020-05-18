@@ -2,6 +2,8 @@
 
 A Pytorch Model which classifies CT image slices to extract the abdominal region from a whole body scan.
 
+<img src="github_im.png"  width="195" height="360">
+
 # Usage
 
 ```
